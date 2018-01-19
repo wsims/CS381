@@ -147,10 +147,10 @@ gt (Succ (a)) (Succ (b)) = gt a b
 --   >>> toInt (mult three three)
 --   9
 --
-mult :: Nat -> Nat ->Nat 
-mult Zero a  = Zero 
-mult one a  = a 
-mult a b = mult (b) (add a a)
+mult :: Nat -> Nat -> Nat
+mult Zero a = Zero 
+mult ((Succ Zero)) a = a
+mult (Succ(b)) a = mult (b) (add a a )
 
 -- | Compute the sum of a list of natural numbers.
 --
@@ -176,4 +176,4 @@ sum (x:xs)  = foldr (add) x xs
 --   10000
 --
 odds :: [Nat]
-odds = (Succ Zero) : map (Succ . Succ) odds
+odds = (Succ Zero) : map (Succ . Succ) odds 
