@@ -2,6 +2,12 @@ module Nat where
 
 import Prelude hiding (Enum(..), sum)
 
+-- NOTE: I did use this website https://gist.github.com/lucywyman/802f6c2b005b5526bcc6
+-- as ref. Some of the functions were insipred from the functions found
+-- on that website, as I used it to help me debug some issues I had. 
+-- If the functions are too similar, please let me
+-- know and we can make appropriate modifications before submission. 
+-- THANKS! Dan 
 
 --
 -- * Part 2: Natural numbers
@@ -84,10 +90,10 @@ toInt a = 1 + toInt (pred( a ))
 --   >>> add two three == add three two
 --   True
 --   
-add :: Nat -> Nat -> Bool 
-add Zero one = one 
-add a b = 
-
+add :: Nat -> Nat -> Nat 
+add a Zero = a 
+add Zero a = a 
+add (Succ a) (Succ b) = add(Succ(Succ(a))) b
 
 -- | Subtract the second natural number from the first. Return zero
 --   if the second number is bigger.
@@ -104,7 +110,10 @@ add a b =
 --   >>> sub one three
 --   Zero
 --
-sub = undefined
+sub :: Nat -> Nat -> Nat 
+sub a Zero = a 
+sub Zero a  = a
+sub (Succ (a)) (Succ (b)) = sub a b 
 
 
 -- | Is the left value greater than the right?
@@ -118,8 +127,11 @@ sub = undefined
 --   >>> gt two two
 --   False
 --
-gt = undefined
-
+gt :: Nat -> Nat -> Bool 
+gt Zero Zero  = False 
+gt a Zero = True 
+gt Zero b = False 
+gt (Succ (a)) (Succ (b)) = gt a b 
 
 -- | Multiply two natural numbers.
 --
@@ -135,8 +147,10 @@ gt = undefined
 --   >>> toInt (mult three three)
 --   9
 --
-mult = undefined
-
+mult :: Nat -> Nat ->Nat 
+mult Zero a  = Zero 
+mult one a  = a 
+mult a b = mult (b) (add a a)
 
 -- | Compute the sum of a list of natural numbers.
 --
@@ -149,8 +163,9 @@ mult = undefined
 --   >>> toInt (sum [one,two,three])
 --   6
 --
-sum = undefined
-
+sum :: [Nat] -> Nat
+sum [] = Zero 
+sum (x:xs)  = foldr (add) x xs 
 
 -- | An infinite list of all of the *odd* natural numbers, in order.
 --
@@ -160,4 +175,5 @@ sum = undefined
 --   >>> toInt (sum (take 100 odds))
 --   10000
 --
-odds = undefined
+odds :: [Nat]
+odds = (Succ Zero) : map (Succ . Succ) odds
