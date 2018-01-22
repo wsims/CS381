@@ -113,16 +113,7 @@ add (Succ a) (Succ b) = add(Succ(Succ(a))) b
 sub :: Nat -> Nat -> Nat 
 sub a Zero = a 
 sub Zero a  = Zero
-sub (Succ (a)) (Succ (b)) = sub(isBigger a b) b       
-
---Helper function to find whether or not the second number is bigger
-
-isBigger :: Nat -> Nat -> Nat
-isBigger Zero Zero = Zero
-isBigger a Zero = a
-isBigger Zero b = Zero
-isBigger a b = isBigger a b
-
+sub (Succ (a)) (Succ (b)) = sub a b       
 
 -- | Is the left value greater than the right?
 --
