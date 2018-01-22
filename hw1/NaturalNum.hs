@@ -75,7 +75,6 @@ toInt :: Nat -> Int
 toInt Zero = 0 
 toInt a = 1 + toInt (pred( a ))
 
-
 -- | Add two natural numbers.
 --
 --   >>> add one two
@@ -148,8 +147,7 @@ gt (Succ (a)) (Succ (b)) = gt a b
 --
 mult :: Nat -> Nat -> Nat
 mult Zero a = Zero 
-mult ((Succ Zero)) a = a
-mult (Succ(b)) a = mult (b) (add a a )
+mult (Succ(a)) b = add (b) (mult a b )
 
 -- | Compute the sum of a list of natural numbers.
 --
