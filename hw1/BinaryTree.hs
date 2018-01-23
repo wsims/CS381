@@ -1,3 +1,4 @@
+-- Authors: Dan Lin (lintzu), Will Sims (simsw), Cameron Friel (frielc)
 module Tree where 
 
 -- | Integer-labeled binary trees.

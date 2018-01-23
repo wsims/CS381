@@ -1,3 +1,4 @@
+-- Authors: Dan Lin (lintzu), Will Sims (simsw), Cameron Friel (frielc)
 module Nat where
 
 import Prelude hiding (Enum(..), sum)
