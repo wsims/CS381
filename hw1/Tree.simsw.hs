@@ -166,20 +166,6 @@ checkIfAscend :: [Int] -> Bool
 checkIfAscend [x] = True
 checkIfAscend (x:xs) = x <= head(xs) && checkIfAscend(xs)
 
--- | Check whether a binary tree is a binary search tree.
---
---   >>> isBST (Leaf 3)
---   True
---
---   >>> isBST (Node 5 (Leaf 6) (Leaf 7))
---   False
---   
---   >>> isBST t1
---   False
---
---   >>> isBST t2
---   True
---   
 isBST :: Tree -> Bool
 isBST = checkIfAscend . inorder
 
