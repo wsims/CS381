@@ -241,15 +241,16 @@ notAll' = map not
 
 -- | Fold a function over the elements of a list.
 simpleFold :: (a -> a -> a) -> a -> [a] -> a
-simpleFold = undefined
+simpleFold f b [] 		= b
+simpleFold f b (h:t) 	= f h (simpleFold f b t)
 
 -- | Reimplement sum using foldr.
 sum' :: [Int] -> Int
-sum' = undefined
+sum' = simpleFold (+) 0
 
 -- | Reimplement product using foldr.
 product' :: [Int] -> Int
-product' = undefined
+product' = simpleFold (*) 1
 
 -- | Fold a function over the elements in a list, allowing the type of the
 --   accumulated value to differ from the elements in the list.

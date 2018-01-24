@@ -12,4 +12,4 @@ module Doctest where
 --   7
 --
 add :: Int -> Int -> Int
-add x y = x + x
+add x y = x + y

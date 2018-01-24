@@ -13,6 +13,23 @@ t2 :: Tree
 t2 = Node 6 (Node 2 (Leaf 1) (Node 4 (Leaf 3) (Leaf 5)))
             (Node 8 (Leaf 7) (Leaf 9))
 
+-- | The integer at the left-most node of a binary tree.
+--
+--   >>> leftmost (Leaf 3)
+--   3
+--
+--   >>> leftmost (Node 5 (Leaf 6) (Leaf 7))
+--   6
+--   
+--   >>> leftmost t1
+--   4
+--
+--   >>> leftmost t2
+--   1
+--
+leftmost :: Tree -> Int
+leftmost (Leaf i)     = i
+leftmost (Node _ l _) = leftmost l
 
 -- | The integer at the right-most node of a binary tree.
 --
@@ -51,7 +68,7 @@ rightmost (Node _ _ r) = rightmost r
 --
 maxInt :: Tree  -> Int
 maxInt (Leaf i) = i 
-maxInt  (Node x l r) = max x (max (maxInt l) (maxInt r))
+maxInt (Node x l r) = max x (max (maxInt l) (maxInt r))
 
 -- | Get the minimum integer from a binary tree.
 --
@@ -149,6 +166,20 @@ checkIfAscend :: [Int] -> Bool
 checkIfAscend [x] = True
 checkIfAscend (x:xs) = x <= head(xs) && checkIfAscend(xs)
 
+-- | Check whether a binary tree is a binary search tree.
+--
+--   >>> isBST (Leaf 3)
+--   True
+--
+--   >>> isBST (Node 5 (Leaf 6) (Leaf 7))
+--   False
+--   
+--   >>> isBST t1
+--   False
+--
+--   >>> isBST t2
+--   True
+--   
 isBST :: Tree -> Bool
 isBST = checkIfAscend . inorder
 
@@ -175,14 +206,3 @@ inBST a (Node x l r)
        | a < x = inBST a l 
        | a > x = inBST a r 
     
-
-
-
-
-
-
-
-
-
-
-
