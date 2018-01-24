@@ -3,12 +3,9 @@ module Nat where
 
 import Prelude hiding (Enum(..), sum)
 
--- NOTE: I did use this website https://gist.github.com/lucywyman/802f6c2b005b5526bcc6
+-- NOTE: We did use this website https://gist.github.com/lucywyman/802f6c2b005b5526bcc6
 -- as ref. Some of the functions were insipred from the functions found
--- on that website, as I used it to help me debug some issues I had. 
--- If the functions are too similar, please let me
--- know and we can make appropriate modifications before submission. 
--- THANKS! Dan 
+-- on that website, as we used it to help us debug some issues we had. 
 
 --
 -- * Part 2: Natural numbers

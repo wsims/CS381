@@ -1,4 +1,12 @@
 -- Authors: Dan Lin (lintzu), Will Sims (simsw), Cameron Friel (frielc)
+--
+-- sources used: https://gist.github.com/camlorn/64e6c30ed6b6bf56f443, 
+-- https://gist.github.com/Kedrigern/1239141/5ee8f5f45facdf4f48785fc92a78ad4104f16537,
+-- https://stackoverflow.com/questions/21202010/implementing-binary-search-tree-insertion-in-haskell
+-- https://stackoverflow.com/questions/10560782/validating-binary-search-tree-beginner-at-haskell
+-- Most of these resources were used to help debug the program.  
+--
+--
 module Tree where 
 
 -- | Integer-labeled binary trees.
