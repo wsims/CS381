@@ -31,7 +31,7 @@ line = Define "line" ["x1", "x2", "y1", "y2"] [Pen Up, Move (Input "x1", Input "
 
 nix = Define "nix" ["x", "y", "w", "h"] [ 
         Call "line" [Input "x", Input "y", Add (Input "x") (Input "w"), Add (Input "y") (Input "h")], 
-        Call "line" [Add (Input "x" ) (Input "w"), Add (Input "y") (Input "h"), Input "x", Input "y"]
+        Call "line" [Input "x",  Add (Input "y") (Input "h"), Add (Input "x") (Input "w"), Input "y"]
       ]
 
 -- Part 4
@@ -39,8 +39,7 @@ step :: Int -> Prog
 step 0 = []
 step n = [
             Call "line" [NumberInput n , NumberInput n , NumberInput (n-1) , NumberInput n],
-            Call "line" [NumberInput (n-1), NumberInput n, NumberInput (n-1), NumberInput (n-1)]
-         
+            Call "line" [NumberInput (n-1), NumberInput n, NumberInput (n-1), NumberInput (n-1)]       
          ] ++ step (n-1)
 
 
