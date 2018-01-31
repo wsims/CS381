@@ -42,6 +42,15 @@ step n = [
             Call "line" [NumberInput (n-1), NumberInput n, NumberInput (n-1), NumberInput (n-1)]       
          ] ++ step (n-1)
 
+-- Part 5
+macros :: Prog -> [Macro]
+macros [] = []
+macros (x:xs) = case x of
+    Define m _ _ -> m:macros xs
+    otherwise -> macros xs
+
+-- Part 6
+
 
 
 
