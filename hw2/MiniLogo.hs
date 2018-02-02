@@ -56,6 +56,12 @@ step n = [
          ] ++ step (n-1)
 
 -- Part 5
+--
+-- | Returns a list of the names of all of the macros that are defined 
+--   
+--   >>> macros [Define "line" ["x1"] [Pen Up]]
+--   ["line"]
+--
 macros :: Prog -> [Macro]
 macros [] = []
 macros (x:xs) = case x of
@@ -63,8 +69,6 @@ macros (x:xs) = case x of
     otherwise -> macros xs
 
 -- Part 6
-
-
 
 
 
