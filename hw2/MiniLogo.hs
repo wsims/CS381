@@ -57,16 +57,26 @@ step n = [
 
 -- Part 5
 --
--- | Returns a list of the names of all of the macros that are defined 
+-- | Returns a list of the names of all of the macros that are defined
 --   
 --   >>> macros [Define "line" ["x1"] [Pen Up]]
 --   ["line"]
 --
+--   >>> macros [Define "line" ["x1"] [Define "nix" ["x1"] [Pen Up]]]
+--   ["line","nix"]
+--
+
 macros :: Prog -> [Macro]
 macros [] = []
 macros (x:xs) = case x of
-    Define m _ _ -> m:macros xs
+    Define m _ p -> (m:macros xs) ++ (macros_cmd (p!!0))
     otherwise -> macros xs
+
+macros_cmd :: Cmd -> [Macro]
+macros_cmd (Define m _ p) = [m] ++ (macros p) 
+macros_cmd (Call _ _) = []
+macros_cmd (Pen _) = []
+macros_cmd (Move _) = []
 
 -- Part 6
 
