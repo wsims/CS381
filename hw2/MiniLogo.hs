@@ -25,9 +25,22 @@ data Cmd = Pen Mode
            deriving(Show)
 
 -- Part 2 
+-- concrete syntax for the macro:
+--  Define "line" (x1, x2, y1, y2) {
+--       up, 
+--       move (x1, y1)  
+--       down
+--       move (x2, y2)
+-- }
+--
 line = Define "line" ["x1", "x2", "y1", "y2"] [Pen Up, Move (Input "x1", Input "y1"), Pen Down, Move (Input "x2", Input "y2"), Pen Up ]
 
 -- Part 3 
+-- concrete syntax for the macro: 
+--  Define "nix" (x, y, w, h){
+--       Call "line" (x, y, x+w, y+h)  
+--       Call "line" (x, y+h, x+w, y)
+--  }
 
 nix = Define "nix" ["x", "y", "w", "h"] [ 
         Call "line" [Input "x", Input "y", Add (Input "x") (Input "w"), Add (Input "y") (Input "h")], 
