@@ -1,3 +1,4 @@
+-- Authors: Dan Lin (lintzu), Will Sims (simsw), Cameron Friel (frielc)
 module MiniLog where
 
 import Prelude hiding (Enum(..), sum)
@@ -66,7 +67,6 @@ step n = [
 --   >>> macros [Define "line" ["x1"] [Define "nix" ["x1"] [Pen Up]]]
 --   ["line","nix"]
 --
-
 macros :: Prog -> [Macro]
 macros [] = []
 macros (x:xs) = case x of
