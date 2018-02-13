@@ -50,10 +50,10 @@ draw p = let (_,ls) = prog p start in toHTML ls
 --   ((Down,(4,5)),Just ((2,3),(4,5)))
 --
 cmd :: Cmd -> State -> (State, Maybe Line)
-cmd (Pen Down) = \(m, p) -> ((Down, p), Nothing)
-cmd (Pen Up) = \(m, p) -> ((Up, p), Nothing)
-cmd (Move x y) = \(Down, (a, z)) -> ((Down, (x, y)), Just ((x, y), (a, z)))
-cmd (Move x y) = \(Up, (a, z)) -> ((Up, (x, y)), Nothing)
+cmd (Pen Down) (m, (x, y)) = ((Down, (x, y)), Nothing);
+cmd (Pen Up) (m, (x, y)) = ((Up, (x, y)), Nothing);
+cmd (Move x y) (Down, p) = ((Down, (x, y)), Just (p, (x, y)))
+cmd (Move x y) (Up, p) = ((Up, (x, y)), Nothing)
 
 -- | Semantic function for Prog.
 --
@@ -64,8 +64,11 @@ cmd (Move x y) = \(Up, (a, z)) -> ((Up, (x, y)), Nothing)
 --   ((Down,(2,2)),[((0,0),(0,1)),((0,1),(1,1)),((1,1),(1,2)),((1,2),(2,2))])
 prog :: Prog -> State -> (State, [Line])
 prog [] = \s -> (s, [])
-prog (c:cs) = \s -> case cmd c s of 
-                        s' -> prog cs s
+prog (c:cs) = \s -> case cmd c s of
+                        ((Down, (x, y)), Nothing) -> prog cs (Down, (x, y))
+                        ((Up, (x, y)), Nothing) -> prog cs (Up, (x, y))
+                        ((Down, (x, y)), Just (p, (a, z))) -> (\(s, cs) -> (s, (p, (a, z)):cs)) (prog cs (Down, (x, y)))
+
 --
 -- * Extra credit
 --
