@@ -80,8 +80,7 @@ amazing :: Prog
 amazing = (spiral 45 3 ++ body 45 3 ++ leftEye 45 3 ++ rightEye 45 3 ++ spiral 20 3 ++ body 20 3 ++ leftEye 20 3 ++ rightEye 20 3 ++ spiral 70 3 ++ body 70 3 ++ leftEye 70 3 ++ rightEye 70 3) 
 
 spiral :: Int -> Int -> Prog
-spiral x y = [Pen Up, Move (x) (y), Pen Down, Move (x) (y+10), Move (x-10) (y+10),
-  Move (x-10) (y), Move (x-2) (y), Move (x-2) (y+8), Move (x-8) (y+8), Move (x-8) (y+2), Move (x-4) (y+2), Move (x-4) (y+6), Move (x-6) (y+6), Move (x-6) (y+4)]
+spiral x y = [Pen Up, Move (x) (y), Pen Down, Move (x) (y+10), Move (x-10) (y+10), Move (x-10) (y), Move (x-2) (y), Move (x-2) (y+8), Move (x-8) (y+8), Move (x-8) (y+2), Move (x-4) (y+2), Move (x-4) (y+6), Move (x-6) (y+6), Move (x-6) (y+4)]
 
 body :: Int -> Int -> Prog
 body x y = [Pen Up, Move (x) (y), Pen Down, Move (x+1) (y), Move (x+3) (y+2), Move (x+5) (y+2),Move (x+5) (y), Move (x+2) (y-3), Move (x-14) (y-3), Move (x-11) (y), Move (x) (y)]
