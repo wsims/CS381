@@ -37,6 +37,8 @@ stmt (Block (x:xs)) d w r = case stmt x d w r of
                             OK w' r' -> stmt (Block xs) d w' r'
                             Done r' -> Done r'
                             Error m -> Error m
+stmt (If t s1 s2) d w r = case test t w r of
+                              t' -> if t' then stmt s1 d w r else stmt s2 d w r
 
 
 -- | Run a Karel program.
