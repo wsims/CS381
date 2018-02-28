@@ -27,11 +27,17 @@ stmt PutBeeper _ w r = let p = getPos r
                        in if isEmpty r
                             then Error ("No beeper. Well too bad, so sad")
                             else OK (incBeeper p w) (decBag r)
-stmt Move _ w r = let p = getPos r
-                  in if isClear p w
-                        then OK w (setPos p r)
+stmt Move _ w (p, c, b) = let np = neighbor c p
+                  in if isClear np w
+                        then OK w (setPos np (p, c, b))
                         else Error ("Blocked at : " ++ show p)
 stmt (Turn d) _ w r = OK w (setFacing (cardTurn d (getFacing r)) r)
+stmt (Block []) _ w r = OK w r
+stmt (Block (x:xs)) d w r = case stmt x d w r of
+                            OK w' r' -> stmt (Block xs) d w' r'
+                            Done r' -> Done r'
+                            Error m -> Error m
+
 
 -- | Run a Karel program.
 prog :: Prog -> World -> Robot -> Result
