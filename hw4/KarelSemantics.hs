@@ -42,17 +42,17 @@ stmt (If t s1 s2) d w r = case test t w r of
                         t' -> if t' then stmt s1 d w r else stmt s2 d w r
 stmt (Call m) d w r = case lookup m d of
                             (Just b) -> stmt b d w r
-                            _        -> Error ("Undefined macro: " ++ m)
-stmt (Iterate i b)  d w r = if i > 0 then case stmt b d w r of
-                                OK w' r' -> stmt (Iterate (i-1) b) d w' r'
+                            _ -> Error ("Undefined macro: " ++ m)
+stmt (Iterate i s) d w r = if i > 0 then case stmt s d w r of
+                                OK w' r' -> stmt (Iterate (i-1) s) d w' r'
                                 Done r' -> Done r'
                                 Error m -> Error m
-                            else OK w r
-stmt (While t b) d w r = if test t w r then case stmt b d w r of
-                                OK w' r' -> stmt (While t b) d w' r'
+                                else OK w r
+stmt (While t s) d w r = if test t w r then case stmt s d w r of
+                                OK w' r' -> stmt (While t s) d w' r'
                                 Done r' -> Done r'
                                 Error m -> Error m
-                            else OK w r
+                                else OK w r
 
 -- | Run a Karel program.
 prog :: Prog -> World -> Robot -> Result
