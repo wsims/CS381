@@ -1,3 +1,4 @@
+% Authors: Dan Lin (lintzu), Will Sims (simsw), Cameron Friel (frielc)
 % Here are a bunch of facts describing the Simpson's family tree.
 % Don't change them!
 
@@ -73,10 +74,11 @@ sibling(Sibling, Siblings) :- parent(Parent, Siblings), parent(Parent, Sibling),
 
 
 % 8. Define the predicate `cousin/2`.
-
+cousin(X,Y) :- child(X,P1), sibling(P1,P2), parent(P2,Y).
 
 % 9. Define the predicate `ancestor/2`.
-
+ancestor(X,Y) :- parent(X,Y).
+ancestor(X,Y) :- parent(X,C), ancestor(C,Y).
 
 % Extra credit: Define the predicate `related/2`.
 
