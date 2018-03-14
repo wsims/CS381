@@ -90,7 +90,13 @@ ancestor(X,Y) :- parent(X,C), ancestor(C,Y).
 
 % 1. Define the predicate `cmd/3`, which describes the effect of executing a
 %    command on the stack.
-
+cmd(add,[L,R|T],S) :- S=[X|T], X is (L+R).
+cmd(lte,[L,R|T],S) :- X = (L =< R -> Y=t;Y=f), call(X), S=[Y|T].
+cmd(if(P1,_),[t|T],S) :- prog(P1,T,S).
+cmd(if(_,P2),[f|T],S) :- prog(P2,T,S).
+cmd(X,Y,S) :- S = [X|Y].
 
 % 2. Define the predicate `prog/3`, which describes the effect of executing a
 %    program on the stack.
+prog([],S1,S2) :- S2 = S1.
+prog([C|T],S1,S2) :- cmd(C,S1,S3), prog(T,S3,S2).
