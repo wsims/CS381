@@ -75,7 +75,10 @@ siblingInLaw(A,B) :- married(B,Z), sibling(Z,A), A \= B.
 % 7. Define two predicates `aunt/2` and `uncle/2`. Your definitions of these
 %    predicates should include aunts and uncles by marriage.
 uncle(A,B) :- brother(A, Z), child(B, Z).
+uncle(A,B) :- siblingInLaw(A, Z), child(B, Z), male(A).
+
 aunt(A,B) :- sister(A, Z), child(B, Z).
+aunt(A,B) :- siblingInLaw(A, Z), child(B, Z), female(A).
 
 % 8. Define the predicate `cousin/2`.
 cousin(X,Y) :- child(X,P1), sibling(P1,P2), parent(P2,Y).
@@ -103,4 +106,4 @@ cmd(X,Y,S) :- S = [X|Y].
 % 2. Define the predicate `prog/3`, which describes the effect of executing a
 %    program on the stack.
 prog([],S1,S2) :- S2 = S1.
-prog([C|T],S1,S2) :- cmd(C,S1,S3), prog(T,S3,S2).
+rog([C|T],S1,S2) :- cmd(C,S1,S3), prog(T,S3,S2).
