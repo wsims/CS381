@@ -106,4 +106,4 @@ cmd(X,Y,S) :- S = [X|Y].
 % 2. Define the predicate `prog/3`, which describes the effect of executing a
 %    program on the stack.
 prog([],S1,S2) :- S2 = S1.
-rog([C|T],S1,S2) :- cmd(C,S1,S3), prog(T,S3,S2).
+prog([C|T],S1,S2) :- cmd(C,S1,S3), prog(T,S3,S2).
