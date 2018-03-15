@@ -64,18 +64,18 @@ grandparent(Grandparent, Grandchild) :- parent(Grandparent, Parent), parent(Pare
 sibling(Sibling, Siblings) :- parent(Parent, Siblings), parent(Parent, Sibling), Sibling \= Siblings.
 
 % 5. Define two predicates `brother/2` and `sister/2`.
-brother(A, B) :- sibling(A, B), male(A), A \= B 
-sister(A, B) :- sibling(A, B), female(A), A\= B
+brother(A, B) :- sibling(A, B), male(A), A \= B. 
+sister(A, B) :- sibling(A, B), female(A), A \= B.
 
 % 6. Define a predicate `siblingInLaw/2`. A sibling-in-law is either married to
 %    a sibling or the sibling of a spouse.
-
-
+siblingInLaw(A,B) :- married(A,Z), sibling(Z,B), A \= B.
+siblingInLaw(A,B) :- married(B,Z), sibling(Z,A), A \= B.
 
 % 7. Define two predicates `aunt/2` and `uncle/2`. Your definitions of these
 %    predicates should include aunts and uncles by marriage.
-uncle(A,B) :- brother(A, Z), child(B, Z)
-aunt(A,B) :- sister(A, Z), child(B, Z)
+uncle(A,B) :- brother(A, Z), child(B, Z).
+aunt(A,B) :- sister(A, Z), child(B, Z).
 
 % 8. Define the predicate `cousin/2`.
 cousin(X,Y) :- child(X,P1), sibling(P1,P2), parent(P2,Y).
